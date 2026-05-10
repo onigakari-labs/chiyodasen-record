@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>千代田線 — WIN5 RECORD ARCHIVE</title>
+<style>
+:root {
+  --bg-1: #0f0f0f;
+  --bg-2: #181818;
+  --bg-3: #232323;
+  --text-1: #e8e0cd;
+  --text-2: #a8a08d;
+  --text-3: #6b6358;
+  --accent: #c8a96a;
+  --accent-dim: #8a7448;
+  --line: #3a3530;
+  --line-paper: #5a5045;
+  --hit: #c8a96a;
+  --miss: #5a5045;
+  --serif: 'Hiragino Mincho ProN', 'YuMincho', 'Yu Mincho', 'Times New Roman', serif;
+  --mono: 'SF Mono', Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-1);
+  color: var(--text-1);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(200, 169, 106, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(200, 169, 106, 0.02) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+@media (max-width: 768px) {
+  .wrap { padding: 24px 16px 60px; }
+}
+
+/* ============ マストヘッド ============ */
+.masthead {
+  text-align: center;
+  border-top: 3px double var(--line-paper);
+  border-bottom: 3px double var(--line-paper);
+  padding: 28px 0 24px;
+  margin-bottom: 36px;
+}
+.masthead-meta-top {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: var(--text-3);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 0 12px;
+}
+.masthead-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 56px;
+  letter-spacing: 0.12em;
+  margin: 0;
+  line-height: 1;
+}
+.masthead-title .accent { color: var(--accent); }
+.masthead-sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--text-2);
+  margin-top: 14px;
+}
+.masthead-meta-bottom {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--text-3);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0 12px;
+}
+@media (max-width: 768px) {
+  .masthead-title { font-size: 36px; }
+  .masthead-sub { font-size: 10px; }
+}
+
+/* ============ サマリ ============ */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.stat-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 20px;
+  text-align: center;
+}
+.stat-card.accent {
+  background: linear-gradient(135deg, rgba(200, 169, 106, 0.12), rgba(200, 169, 106, 0.04));
+  border-color: var(--accent);
+}
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-1);
+  line-height: 1.1;
+}
+.stat-card.accent .stat-value { color: var(--accent); }
+.stat-unit {
+  font-size: 14px;
+  color: var(--text-2);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* ============ セクション ============ */
+.section {
+  margin-bottom: 40px;
+  padding-top: 28px;
+  border-top: 3px double var(--line-paper);
+}
+.section-head {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.section-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--text-1);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+.section-title::before, .section-title::after {
+  content: '◇';
+  margin: 0 14px;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+/* ============ 戦略別成績 ============ */
+.strategies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.strategy-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+.strategy-name {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.strategy-name .badge {
+  display: inline-flex;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg-1);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+}
+.strategy-stats-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.strategy-hits {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.strategy-of {
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+/* ============ 週次カード ============ */
+.weekly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.week-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 26px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+.week-card:hover { border-color: var(--accent); }
+.week-card.has-hit {
+  background: linear-gradient(135deg, rgba(200, 169, 106, 0.08), rgba(200, 169, 106, 0.02));
+}
+.week-info { min-width: 0; }
+.week-date {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+.week-headline {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 10px;
+}
+.week-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+.week-stat {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+.week-stat .num {
+  font-weight: 700;
+  color: var(--text-1);
+  font-variant-numeric: tabular-nums;
+}
+.week-memo {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--text-2);
+  margin-top: 10px;
+  font-style: italic;
+}
+.week-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--accent-dim);
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.week-link:hover {
+  background: rgba(200, 169, 106, 0.1);
+}
+@media (max-width: 600px) {
+  .week-card { grid-template-columns: 1fr; }
+  .week-link { justify-self: start; }
+}
+
+/* ============ ローディング・エラー ============ */
+.state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.state-mark {
+  font-size: 48px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  font-family: var(--serif);
+}
+.state-msg {
+  color: var(--text-2);
+  font-family: var(--serif);
+  font-size: 14px;
+}
+.spinner {
+  width: 38px; height: 38px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============ フッター ============ */
+.footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 28px;
+  border-top: 3px double var(--line-paper);
+}
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+.footer-disclaimer {
+  font-family: var(--serif);
+  font-size: 11px;
+  color: var(--text-3);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+  <!-- マストヘッド -->
+  <header class="masthead">
+    <div class="masthead-meta-top">
+      <span>RECORD ARCHIVE</span>
+      <span>WIN5 PERFORMANCE LOG</span>
+    </div>
+    <div class="masthead-title"><span class="accent">千代田線</span></div>
+    <div class="masthead-sub">CHIYODASEN — WIN5 RECORD</div>
+    <div class="masthead-meta-bottom">
+      <span id="generated-at">GENERATED: —</span>
+      <span id="total-summary">— WEEKS</span>
+    </div>
+  </header>
+
+  <!-- ローディング -->
+  <div id="loading" class="state">
+    <div class="spinner"></div>
+    <div class="state-msg" style="margin-top: 16px;">戦績データを読込中…</div>
+  </div>
+
+  <!-- エラー -->
+  <div id="error" class="state" style="display:none;">
+    <div class="state-mark">×</div>
+    <div class="state-msg" id="error-msg"></div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <div id="content" style="display:none;">
+
+    <!-- 累計サマリ -->
+    <section class="summary" id="summary"></section>
+
+    <!-- 戦略別成績 -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-kicker">3 STRATEGIES</div>
+        <h2 class="section-title">戦略別 累計成績</h2>
+      </div>
+      <div class="strategies" id="strategies"></div>
+    </section>
+
+    <!-- 週次一覧 -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-kicker">WEEKLY ARCHIVE</div>
+        <h2 class="section-title">過去のWIN5</h2>
+      </div>
+      <div class="weekly-list" id="weekly-list"></div>
+    </section>
+
+  </div>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer-meta">千代田線 — Personal AI Forecast Archive</div>
+    <div class="footer-disclaimer">※ 本予想はAIによる参考情報です。馬券の購入は自己責任でお願いします。</div>
+  </footer>
+
+</div>
+
+<script>
+async function loadData() {
+  try {
+    const r = await fetch('./data/record.json?t=' + Date.now());
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    render(data);
+  } catch (e) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error').style.display = 'block';
+    document.getElementById('error-msg').textContent = e.message || String(e);
+  }
+}
+
+function formatGenerated(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function render(data) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+
+  document.getElementById('generated-at').textContent = `GENERATED: ${formatGenerated(data.generatedAt)}`;
+  document.getElementById('total-summary').textContent = `${data.summary.totalWeeks} WEEKS / ${data.summary.totalRaces} RACES`;
+
+  // サマリカード
+  const summary = data.summary;
+  const summaryHtml = [
+    `<div class="stat-card"><div class="stat-label">PREDICTED WEEKS</div><div class="stat-value">${summary.totalWeeks}<span class="stat-unit">週</span></div></div>`,
+    `<div class="stat-card"><div class="stat-label">TOTAL RACES</div><div class="stat-value">${summary.totalRaces}<span class="stat-unit">R</span></div></div>`,
+    `<div class="stat-card accent"><div class="stat-label">AXIS HIT RATE</div><div class="stat-value">${(summary.axisHitRate * 100).toFixed(1)}<span class="stat-unit">%</span></div></div>`,
+    `<div class="stat-card"><div class="stat-label">PERFECT HIT</div><div class="stat-value">${summary.perfectHitWeeks}<span class="stat-unit">回</span></div></div>`,
+  ].join('');
+  document.getElementById('summary').innerHTML = summaryHtml;
+
+  // 戦略別
+  const strategies = [
+    { name: '軸1頭固定', badge: 'A', hits: summary.axisSingleHits, total: summary.totalRaces },
+    { name: '軸2頭BOX',  badge: 'B', hits: summary.axisDoubleHits, total: summary.totalRaces },
+    { name: '総流し',    badge: 'C', hits: summary.broadHits,      total: summary.totalRaces },
+  ];
+  const stratHtml = strategies.map(s => `
+    <div class="strategy-card">
+      <div class="strategy-name"><span class="badge">${s.badge}</span><span>${s.name}</span></div>
+      <div class="strategy-stats-line">
+        <span class="strategy-hits">${s.hits}</span>
+        <span class="strategy-of">hits / ${s.total} races</span>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('strategies').innerHTML = stratHtml;
+
+  // 週次一覧
+  const weekHtml = data.weeks.map(w => {
+    const hasHit = (w.axisSingle || 0) > 0;
+    const hitRaces = w.races.filter(r => r.axisHit);
+    const hitDescription = hitRaces.length > 0
+      ? hitRaces.map(r => `◎${r.name} ${r.horseName}的中`).join(' / ')
+      : '';
+    const dateLabel = formatDateLabel(w.date);
+    return `
+      <div class="week-card ${hasHit ? 'has-hit' : ''}">
+        <div class="week-info">
+          <div class="week-date">${dateLabel}</div>
+          <div class="week-headline">${w.g1 || (w.course || 'WIN5')}</div>
+          <div class="week-stats">
+            <span class="week-stat">軸1頭 <span class="num">${w.axisSingle ?? '-'}/5</span></span>
+            <span class="week-stat">軸2頭BOX <span class="num">${w.axisDouble ?? '-'}/5</span></span>
+            <span class="week-stat">総流し <span class="num">${w.broad ?? '-'}/5</span></span>
+            ${w.perfectHit ? '<span class="week-stat" style="background:var(--accent); color:var(--bg-1); border-color:var(--accent);"><span class="num">★ 完全的中</span></span>' : ''}
+          </div>
+          ${hitDescription ? `<div class="week-memo">🎯 ${hitDescription}</div>` : ''}
+        </div>
+        ${w.shareUrl ? `<a class="week-link" href="${w.shareUrl}" target="_blank" rel="noopener">公開ページ →</a>` : ''}
+      </div>
+    `;
+  }).join('');
+  document.getElementById('weekly-list').innerHTML = weekHtml || '<div class="state"><div class="state-msg">まだ予想記録がありません</div></div>';
+}
+
+function formatDateLabel(yyyymmdd) {
+  if (!yyyymmdd) return '';
+  // YYYY/MM/DD 形式想定
+  const m = yyyymmdd.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  if (!m) return yyyymmdd;
+  const [_, y, mo, d] = m;
+  const date = new Date(`${y}-${mo.padStart(2,'0')}-${d.padStart(2,'0')}`);
+  const wd = ['日','月','火','水','木','金','土'][date.getDay()];
+  return `${y}年 ${parseInt(mo)}月${parseInt(d)}日(${wd})`;
+}
+
+loadData();
+</script>
+
+</body>
+</html>

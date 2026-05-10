@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-05-10T20:19:45.730039+09:00",
+  "summary": {
+    "totalWeeks": 1,
+    "totalRaces": 5,
+    "axisSingleHits": 2,
+    "axisDoubleHits": 3,
+    "broadHits": 3,
+    "perfectHitWeeks": 0,
+    "axisHitRate": 0.4,
+    "axisHitRaces": 2
+  },
+  "weeks": [
+    {
+      "date": "2026/05/10",
+      "course": "京都/東京/新潟",
+      "g1": "NHKマイルC(G1)",
+      "axisSingle": 2,
+      "axisDouble": 3,
+      "broad": 3,
+      "perfectHit": false,
+      "aiEval": "○",
+      "memo": "NHKマイル ◎17 ロデオドライブ的中。橘S◎4も的中",
+      "shareUrl": "https://chiyodasen.onrender.com/share/9h4FSQk8JBvl9zvKP1vKrz0A",
+      "races": [
+        {
+          "r": 1,
+          "course": "京都10R",
+          "name": "橘S",
+          "marks": {
+            "◎": 4,
+            "○": 5,
+            "▲": 1,
+            "△": 6,
+            "×": 10
+          },
+          "first": 4,
+          "horseName": "タガノアラリア",
+          "axisHit": true
+        },
+        {
+          "r": 2,
+          "course": "東京10R",
+          "name": "メトロポリタ",
+          "marks": {
+            "◎": 10,
+            "○": 2,
+            "▲": 12,
+            "△": 8,
+            "×": 5
+          },
+          "first": 12,
+          "horseName": "ウエストナウ",
+          "axisHit": false
+        },
+        {
+          "r": 3,
+          "course": "新潟11R",
+          "name": "谷川岳S",
+          "marks": {
+            "◎": 11,
+            "○": 12,
+            "▲": 9,
+            "△": 5,
+            "×": 6
+          },
+          "first": 7,
+          "horseName": "ランフォーヴァウ",
+          "axisHit": false
+        },
+        {
+          "r": 4,
+          "course": "京都11R",
+          "name": "平城京S",
+          "marks": {
+            "◎": 10,
+            "○": 4,
+            "▲": 16,
+            "△": 5,
+            "×": 14
+          },
+          "first": 4,
+          "horseName": "テスティモーネ",
+          "axisHit": false
+        },
+        {
+          "r": 5,
+          "course": "東京11R",
+          "name": "NHKマイル",
+          "marks": {
+            "◎": 17,
+            "○": 10,
+            "▲": 7,
+            "△": 16,
+            "×": 4
+          },
+          "first": 17,
+          "horseName": "ロデオドライブ",
+          "axisHit": true
+        }
+      ]
+    }
+  ]
+}
